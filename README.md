@@ -31,3 +31,7 @@ $ bin/rails s
 ・マイページのプロフィール機能へ紹介文を追加
 　usersテーブルにintroductionカラムを追加して、以下に自己紹介カラムを追加する。
   app/views/mypage/profiles/show.html.erb
+  また、ログイン時はプロフィール画面（app/views/mypage/profiles/show.html.erb）に遷移するよう
+  ルーティングを行い、プロフィール画面のトップに以下テキストを入れて自己紹介を促進します。
+  「自己紹介を入力してもくもく会仲間を見つけよう！」
+  (not null制約をつけると返ってユーザー離れにつながる恐れがあるので、not null制約はつけない）
