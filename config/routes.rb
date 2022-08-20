@@ -4,12 +4,13 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   get 'events/index'
   root 'events#index'
+  #root 'mypage/profiles#show'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
-  resources :users, only: %i[new create]
+  resources :users, only: %i[new create index show]
   resources :events do
     collection do
       get :future

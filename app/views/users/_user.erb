@@ -1,0 +1,13 @@
+<div class="col">
+  <div class="card h-100">
+    <div class="card-body">
+      <h4 class="card-title fw-bold">
+        <%= link_to user.name, user_path(user), class: 'card-link' %>
+      </h4>
+      <%= image_tag user.decorate.avatar, class: 'avatar-xl rounded-circle' %>
+      <p class="card-text"><%= user.introduction %></p>
+    </div>
+  </div>
+</div>
+     
+
