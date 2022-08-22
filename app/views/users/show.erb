@@ -1,12 +1,30 @@
-<div class="col">
-  <div class="card h-100">
-    <div class="card-body">
-      <h2 class="card-title fw-bold">
-        <%= @user.name %>
-      </h2>
-      <%= image_tag @user.decorate.avatar, class: 'avatar-xl rounded-circle' %>
-      <h2 class="card-text"><%= @user.introduction %></h2>
+<div class="container">
+  <h1 class="font-weight-normal mt-5 mb-5">自己紹介</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+      <%= render @user %>
     </div>
-  </div>
 </div>
+
+<div class="container">
+  <% if @followers.present? %>
+    <h1 class="font-weight-normal mt-5 mb-5">フォロワー</h1>
+      <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+        <%= render @followers %>
+      </div>
+      <div class="mx-auto">
+        <%= paginate @followers %>
+      </div>
+  <% end %>
+
+  <% if @followings.present? %>
+    <h1 class="font-weight-normal mt-5 mb-5">フォロー</h1>
+      <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+        <%= render @followings %>
+      </div>
+      <div class="mx-auto">
+        <%= paginate @followings %>
+      </div>
+  <% end %>
+</div>
+
      

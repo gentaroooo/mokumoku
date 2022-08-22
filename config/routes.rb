@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'relationships/create'
+  get 'relationships/destroy'
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   get 'events/index'
   root 'events#index'
@@ -10,7 +12,13 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
-  resources :users, only: %i[new create index show]
+  resources :users, only: %i[new create index show] do
+    member do
+      get :followings
+      get :followers
+    end
+  end
+    
   resources :events do
     collection do
       get :future
@@ -42,4 +50,6 @@ Rails.application.routes.draw do
       resources :events, only: %i[index]
     end
   end
+
+  resources :relationships, only: [:create, :destroy]
 end

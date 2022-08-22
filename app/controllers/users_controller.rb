@@ -22,11 +22,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @followings = @user.followings.page(params[:page]).per(3)
+    @followers = @user.followers.page(params[:page]).per(3)
   end
+
+  private
 
   def user_params
     params.require(:user).permit(:email, :name, :password, :password_confirmation, :introduction)
   end
-
-  
 end

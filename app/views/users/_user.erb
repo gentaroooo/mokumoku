@@ -5,6 +5,7 @@
         <%= link_to user.name, user_path(user), class: 'card-link' %>
       </h4>
       <%= image_tag user.decorate.avatar, class: 'avatar-xl rounded-circle' %>
+      <p><%= render 'relationships/follow_button', user: user %></P>
       <p class="card-text"><%= user.introduction %></p>
     </div>
   </div>
