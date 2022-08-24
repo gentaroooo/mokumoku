@@ -110,12 +110,12 @@ ActiveRecord::Schema.define(version: 2022_08_20_210112) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "follow_id", null: false
+    t.integer "user_id"
+    t.integer "follower_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["follow_id"], name: "index_relationships_on_follow_id"
-    t.index ["user_id", "follow_id"], name: "index_relationships_on_user_id_and_follow_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
+    t.index ["user_id", "follower_id"], name: "index_relationships_on_user_id_and_follower_id", unique: true
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
@@ -161,8 +161,7 @@ ActiveRecord::Schema.define(version: 2022_08_20_210112) do
   add_foreign_key "events", "users"
   add_foreign_key "notifications", "users", column: "receiver_id"
   add_foreign_key "notifications", "users", column: "sender_id"
-  add_foreign_key "relationships", "users"
-  add_foreign_key "relationships", "users", column: "follow_id"
+  add_foreign_key "relationships", "users", column: "follower_id"
   add_foreign_key "user_notification_timings", "notification_timings"
   add_foreign_key "user_notification_timings", "users"
   add_foreign_key "user_prefectures", "prefectures"

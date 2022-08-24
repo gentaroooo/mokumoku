@@ -3,10 +3,12 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
-  has_many :relationships
-  has_many :followings, through: :relationships, source: :follow
-  has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id'
-  has_many :followers, through: :reverses_of_relationship, source: :user
+ # フォローしている関係
+  has_many :relationships, dependent: :destroy
+  has_many :followings, through: :relationships, source: :follower
+  # フォローされている関係
+  has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
+  has_many :followers, through: :passive_relationships, source: :user
 
   has_many :events, dependent: :destroy
   has_many :event_attendances, dependent: :destroy
@@ -34,6 +36,10 @@ class User < ApplicationRecord
   scope :allowing_liked_event_notification,
         -> { joins(:notification_timings).merge(NotificationTiming.liked_event) }
 
+  def own?(object)
+    id == object.user_id
+  end
+          
   def owner?(event)
     event.user_id == id
   end
@@ -82,18 +88,17 @@ class User < ApplicationRecord
     notification_timings.liked_event.present?
   end
 
+  def following?(user)
+    followings.include?(user)
+  end
+
   def follow(other_user)
-    unless self == other_user
-      self.relationships.find_or_create_by(follow_id: other_user.id)
-    end
+    return if self == other_user
+
+    relationships.find_or_create_by!(follower: other_user)
   end
 
-  def unfollow(other_user)
-    relationship = self.relationships.find_by(follow_id: other_user.id)
-    relationship.destroy if relationship
-  end
-
-  def following?(other_user)
-    self.followings.include?(other_user)
+  def unfollow(relathinoship_id)
+    relationships.find(relathinoship_id).destroy!
   end
 end

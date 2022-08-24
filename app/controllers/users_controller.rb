@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  before_action :set_user, only: %i[show following follower]
   def new
     @user = User.new
   end
@@ -21,14 +22,24 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @followings = @user.followings.page(params[:page]).per(3)
-    @followers = @user.followers.page(params[:page]).per(3)
   end
+
+  def following
+    @users = User.find(params[:id]).followings
+  end
+
+  def follower
+    @users = User.find(params[:id]).followers
+  end
+
 
   private
 
   def user_params
     params.require(:user).permit(:email, :name, :password, :password_confirmation, :introduction)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end
