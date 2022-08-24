@@ -1,56 +1,27 @@
-      <div class="bg-white border rounded-2 p-3" style="min-width: 300px;">
-        <div class="d-flex align-items-center">
-          <div class="d-md-flex">
-            <h3><%= @user.name %></h3>
-            <%= render 'relationships/follow_button', user: @user %>
-          </div>
-        </div>
-        <div class="pt-3">
-          <p class="border-bottom fs-7 fw-bolder mb-2">自己紹介</p>
-          <p class=""><%= simple_format @user.introduction %></p>
-        </div>
-        <div class="d-flex">
-          <%= link_to following_user_path(@user), class: 'me-3 mb-0 text-decoration-none', id: 'follow-count' do %>
-            <span class="text-dark"><%= @user.followings.length %></span><small class="text-secondary"> フォロー中</small>
-          <% end %>
-          <%= link_to follower_user_path(@user), class: 'mb-0 text-decoration-none', id: 'follower-count' do %>
-            <span class="text-dark"><%= @user.followers.length %></span><small class="text-secondary"> フォロワー</small>
-          <% end %>
-        </div>
-      </div>
-
-
-
-
-
-
-
-
-<%
-=begin%>
- <div class="container">
-  <% if @followers.present? %>
-    <h1 class="font-weight-normal mt-5 mb-5">フォロワー</h1>
-      <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
-        <%= render @followers %>
-      </div>
-      <div class="mx-auto">
-        <%= paginate @followers %>
-      </div>
-  <% end %>
-
-  <% if @followings.present? %>
-    <h1 class="font-weight-normal mt-5 mb-5">フォロー</h1>
-      <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
-        <%= render @followings %>
-      </div>
-      <div class="mx-auto">
-        <%= paginate @followings %>
-      </div>
-  <% end %>
-</div> 
-<%
-=end%>
+<div class="bg-white border rounded-2 p-3" style="min-width: 300px;">
+  <div class="d-flex align-items-center">
+    <div class="d-md-flex">
+      <h3><%= @user.name %></h3>
+      <%= image_tag @user.decorate.avatar, class: 'avatar-xl rounded-circle' %>
+      <%= render 'relationships/follow_button', user: @user %>
+    </div>
+  </div>
+  <div class="pt-3">
+    <% if  @user.introduction.present? %>
+      <p class="border-bottom fs-7 fw-bolder mb-2">自己紹介</p>
+      <p class=""><%= simple_format @user.introduction %></p>
+    <% end %>
+    
+  </div>
+  <div class="d-flex">
+    <%= link_to following_user_path(@user), class: 'me-3 mb-0 text-decoration-none', id: 'follow-count' do %>
+      <span class="text-dark"><%= @user.followings.length %></span><small class="text-secondary"> フォロー中</small>
+    <% end %>
+    <%= link_to follower_user_path(@user), class: 'mb-0 text-decoration-none', id: 'follower-count' do %>
+      <span class="text-dark"><%= @user.followers.length %></span><small class="text-secondary"> フォロワー</small>
+    <% end %>
+  </div>
+</div>
 
 
      
