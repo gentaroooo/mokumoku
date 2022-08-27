@@ -1,5 +1,11 @@
-require 'rails_helper'
+# RSpec.describe Relationship, type: :model do
+#   describe 'バリデーション確認' do
+#     let(:created_relationship) { create(:relationship) }
 
-RSpec.describe Relationship, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
+#     it '有効であること' do
+#       relationship = build(:relationship)
+#       expect(relationship).to be_valid
+#       expect(relationship.errors).to be_empty
+#     end
+#   end
+# end
