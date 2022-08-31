@@ -11,12 +11,12 @@ require "./db/environment/#{Rails.env.downcase}.rb"
 )
 end
 
-  User.create!(
-    name: "test",
-    email: "a@yahoo.co.jp",
-    password: 'going212',
-    password_confirmation: 'going212'
-)
+#   User.create!(
+#     name: "test",
+#     email: "a@yahoo.co.jp",
+#     password: 'going212',
+#     password_confirmation: 'going212'
+# )
 
 100.times do |n|
   Event.create!(

@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   get 'events/index'
   root 'events#index'
-  #root 'mypage/profiles#show'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
