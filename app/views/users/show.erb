@@ -9,7 +9,7 @@
   <div class="pt-3">
     <% if  @user.introduction.present? %>
       <p class="border-bottom fs-7 fw-bolder mb-2">自己紹介</p>
-      <p class=""><%= simple_format @user.introduction %></p>
+      <p class=""><%= simple_format @user.introduction, sanitize: true %></p>
     <% end %>
     
   </div>

@@ -1,5 +1,5 @@
 <% if current_user.introduction.blank? %>
-  <script>alert('自己紹介を入力して気の合う仲間を見つけよう！')</script>
+  <h1>自己紹介を入力して気の合う仲間を見つけよう！</h1>
 <% end %>
 
 <!-- User info -->
@@ -20,7 +20,7 @@
             <%= current_user.name %>
           </h2>
           <p class="mb-0 d-block"><%= current_user.email %></p>
-          <h3 class="mb-0"><%= simple_format(current_user.introduction) %></h3>
+          <h3 class="mb-0"><%= simple_format(current_user.introduction, sanitize: true) %></h3>
         </div>
       </div>
     </div>
