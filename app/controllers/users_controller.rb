@@ -21,8 +21,7 @@ class UsersController < ApplicationController
     @users = User.order(id: :desc).page(params[:page]).per(6)
   end
 
-  def show
-  end
+  def show; end
 
   def following
     @users = @user.followings.page(params[:page]).per(4)
@@ -31,7 +30,6 @@ class UsersController < ApplicationController
   def follower
     @users = @user.followers.page(params[:page]).per(4)
   end
-
 
   private
 

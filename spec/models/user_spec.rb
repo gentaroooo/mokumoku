@@ -100,18 +100,18 @@ RSpec.describe User, type: :model do
       expect(user).to be_invalid
     end
 
-    it "パスワードがない場合、無効" do
+    it 'パスワードがない場合、無効' do
       user = build(:user, password: nil)
       expect(user).to be_invalid
     end
 
-    it "パスワードが3文字より小さい場合、無効" do
+    it 'パスワードが3文字より小さい場合、無効' do
       user = build(:user, password: 'a' * 3)
       expect(user).to be_invalid
     end
 
-    it "パスワードとパスワード確認が一致していない場合、無効" do
-      user = build(:user, password_confirmation: "abcdefgh")
+    it 'パスワードとパスワード確認が一致していない場合、無効' do
+      user = build(:user, password_confirmation: 'abcdefgh')
       expect(user).to be_invalid
     end
 

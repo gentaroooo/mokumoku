@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
-  
+
 RSpec.describe 'Users', type: :system do
   let(:existed_user) { create(:user) }
 
@@ -21,7 +23,7 @@ RSpec.describe 'Users', type: :system do
     let!(:me) { create(:user) }
     let!(:others) { create(:user) }
     before { login_as(me) }
-    
+
     context '正常系' do
       it 'ログインしたユーザーがユーザー一覧に表示される' do
         visit users_path(me)
