@@ -1,0 +1,12 @@
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h2 class="card-title fw-bold">
+          <%= @user.name %>        
+        </h2>
+        <%= image_tag @user.decorate.avatar, class: 'avatar-xl rounded-circle' %>
+        <h2 class="card-text"><%= @user.introduction %></h2>
+        <%= render 'relationships/follow_button', user: @user %>
+      </div>
+    </div>
+  </div>

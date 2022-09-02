@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_19_072358) do
+ActiveRecord::Schema.define(version: 2022_08_20_210112) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -109,6 +109,16 @@ ActiveRecord::Schema.define(version: 2022_01_19_072358) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "relationships", force: :cascade do |t|
+    t.integer "followed_id", null: false
+    t.integer "follower_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["followed_id", "follower_id"], name: "index_relationships_on_followed_id_and_follower_id", unique: true
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
   create_table "user_notification_timings", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "notification_timing_id", null: false
@@ -135,6 +145,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_072358) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "introduction"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
@@ -150,6 +161,8 @@ ActiveRecord::Schema.define(version: 2022_01_19_072358) do
   add_foreign_key "events", "users"
   add_foreign_key "notifications", "users", column: "receiver_id"
   add_foreign_key "notifications", "users", column: "sender_id"
+  add_foreign_key "relationships", "users", column: "followed_id"
+  add_foreign_key "relationships", "users", column: "follower_id"
   add_foreign_key "user_notification_timings", "notification_timings"
   add_foreign_key "user_notification_timings", "users"
   add_foreign_key "user_prefectures", "prefectures"
